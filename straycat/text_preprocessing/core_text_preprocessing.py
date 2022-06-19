@@ -121,16 +121,16 @@ class CoreTextPreprocessing:
         else:
             raise ValueError("library not found")
 
-    def concate_token(self, token):
-        """concate token into sentences
+    def concat_token(self, token):
+        """concat token into sentences
 
         Args:
-          token(str): list of token will be concate
+          token(str): list of token will be concat
 
         Returns:
           str: the sentences formed from the sentence
 
-        >>> st.concate_token(["saya", "sedang", "memakan", "apple"])
+        >>> st.concat_token(["saya", "sedang", "memakan", "apple"])
         "saya sedang memakan apple"
         """
         kalimat = " ".join(token)
@@ -140,20 +140,20 @@ class CoreTextPreprocessing:
         kalimat = kalimat.strip(" ")
         return kalimat
 
-    def normalize_slang(self, text,return_type="sentences"):
+    def normalize_slang(self, text,return_type="tokens"):
         """Remove slang words from text
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): the sentences or token without slang words.
 
         >>> st.normalize_slang("ak sk mkan")
-        "saya suka makan"
-        >>> st.normalize_slang("ak sk mkan", return_type = "tokens")
         ["saya", "suka", "makan"]
+        >>> st.normalize_slang("ak sk mkan", return_type = "sentences")
+        "saya suka makan"
         """
         kamus_alay = {}
         path = os.path.dirname(os.path.abspath(__file__))
@@ -166,26 +166,26 @@ class CoreTextPreprocessing:
                 tokens[index] = kamus_alay[token]
 
         if return_type == "sentences":
-            return self.concate_token(tokens)
+            return self.concat_token(tokens)
         elif return_type == "tokens":
             return tokens
         else:
             raise ValueError("argument "+return_type+" not found")
 
-    def remove_medianame(self, text, return_type="sentences"):
+    def remove_medianame(self, text, return_type="tokens"):
         """Remove media name from text
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): the sentences or tokens without media name.
 
         >>> st.remove_medianame("kompas.com berita hari ini")
-        "berita hari ini"
-        >>> st.remove_medianame("kompas.com berita hari ini", return_type = "tokens")
         ["berita", "hari", "ini"]
+        >>> st.remove_medianame("kompas.com berita hari ini", return_type = "sentences")
+        "berita hari ini"
         """
         list_media = []
         path = os.path.dirname(os.path.abspath(__file__))
@@ -207,20 +207,20 @@ class CoreTextPreprocessing:
             raise ValueError("argument "+return_type+" not found")
 
 
-    def remove_link(self, text,return_type="sentences"):
+    def remove_link(self, text,return_type="tokens"):
         """
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): the sentences or tokens without link.
 
         >>> st.remove_link("https://www.kompas.com berita hari ini")
-        "berita hari ini"
-        >>> st.remove_link("https://www.kompas.com berita hari ini", return_type = "tokens")
         ["berita", "hari", "ini"]
+        >>> st.remove_link("https://www.kompas.com berita hari ini", return_type = "sentences")
+        "berita hari ini"
         """
 
         # all link only
@@ -243,20 +243,20 @@ class CoreTextPreprocessing:
         else:
             raise ValueError("argument "+return_type+" not found")
 
-    def remove_date(self, text,return_type="sentences"):
+    def remove_date(self, text,return_type="tokens"):
         """Remove date from document
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): The sentences or tokens without date
 
         >>> st.remove_date("tanggal 03 Maret 2020 17/08/1945 10-11-1945 tanggal")
-        "tanggal tanggal"
-        >>> st.remove_date("tanggal 03 Maret 2020 17/08/1945 10-11-1945 tanggal",return_type="tokens")
         ["tanggal", "tanggal"]
+        >>> st.remove_date("tanggal 03 Maret 2020 17/08/1945 10-11-1945 tanggal",return_type="sentences")
+        "tanggal tanggal"
         """
 
         bulan = {
@@ -305,20 +305,20 @@ class CoreTextPreprocessing:
             raise ValueError("argument "+return_type+" not found")
 
 
-    def remove_emoji(self, text,return_type="sentences"):
+    def remove_emoji(self, text,return_type="tokens"):
         """
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): The sentences or tokens without emoji
 
         >>> st.remove_emoji("hahaha 😀 😃 😄 hahaha 😁 😆 😅 hahaha")
-        "hahaha hahaha hahaha"
-        >>> st.remove_emoji("hahaha 😀 😃 😄 hahaha 😁 😆 😅 hahaha", return_type="tokens")
         ["hahaha","hahaha","hahaha"]
+        >>> st.remove_emoji("hahaha 😀 😃 😄 hahaha 😁 😆 😅 hahaha", return_type="sentences")
+        "hahaha hahaha hahaha"
         """
         regex = re.compile("["
                            u"\U0001F600-\U0001F64F"  # emoticons
@@ -336,27 +336,27 @@ class CoreTextPreprocessing:
                 tokens[index] = ''
         
         if return_type == "sentences":
-            return self.concate_token(tokens)
+            return self.concat_token(tokens)
         elif return_type == "tokens":
             return [token for token in tokens if token.strip()]
         else:
             raise ValueError("argument "+return_type+" not found")
 
 
-    def stop_words(self, text,return_type="sentences"):
+    def stop_words(self, text,return_type="tokens"):
         """remove stopwords from the documents
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): The sentences or tokens without stopwords
 
         >>> st.stop_words("apel yang terlihat lezat")
-        "apel terlihat lezat"
-        >>> st.stop_words("apel yang terlihat lezat",return_type="tokens")
         ["apel","terlihat","lezat"]
+        >>> st.stop_words("apel yang terlihat lezat",return_type="sentences")
+        "apel terlihat lezat"
         """
         tokens = self.tokenize(text)
         for token in tokens:
@@ -364,26 +364,26 @@ class CoreTextPreprocessing:
                 index = tokens.index(token)
                 tokens[index] = ''
         if return_type == "sentences":
-            return self.concate_token(tokens)
+            return self.concat_token(tokens)
         elif return_type == "tokens":
             return [token for token in tokens if token.strip()]
         else:
             raise ValueError("argument "+return_type+" not found")
 
-    def remove_punc(self, text, return_type="sentences"):
+    def remove_punc(self, text, return_type="tokens"):
         """Remove punctuation from document
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): The sentences or tokens without punctuation
 
         >>> st.remove_punc("dapat hubungi akun@google !!!")
-        "dapat hubungi akun@google"
-        >>> st.remove_punc("dapat hubungi akun@google !!!", return_type="tokens")
         ["dapat","hubungi","akun@google"]
+        >>> st.remove_punc("dapat hubungi akun@google !!!", return_type="sentences")
+        "dapat hubungi akun@google"
         """
 
         tokens = self.tokenize(text)
@@ -393,26 +393,26 @@ class CoreTextPreprocessing:
                 index = tokens.index(token)
                 tokens[index] = ''
         if return_type == "sentences":
-            return self.concate_token(tokens)
+            return self.concat_token(tokens)
         elif return_type == "tokens":
             return [token for token in tokens if token.strip()]
         else:
             raise ValueError("argument "+return_type+" not found")
 
-    def remove_non_alnum(self, text, return_type="sentences"):
+    def remove_non_alnum(self, text, return_type="tokens"):
         """
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): The sentences or tokens only
 
         >>> st.remove_non_alnum("dapat hubungi akun@google !!!")
-        "dapat hubungi"
-        >>> st.remove_non_alnum("dapat hubungi akun@google !!!", return_type="tokens")
         ["dapat","hubungi"]
+        >>> st.remove_non_alnum("dapat hubungi akun@google !!!", return_type="sentences")
+        "dapat hubungi"
         """
 
         tokens = self.tokenize(text)
@@ -423,26 +423,26 @@ class CoreTextPreprocessing:
                 tokens[index] = ''
         
         if return_type == "sentences":
-           return self.concate_token(tokens)
+           return self.concat_token(tokens)
         elif return_type == "tokens":
            return [token for token in tokens if token.strip()]
         else:
             raise ValueError("argument "+return_type+" not found")
             
-    def stemming(self, text,return_type="sentences"):
+    def stemming(self, text,return_type="tokens"):
         """Stemming the sentences to stem words
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): The sentences or tokens with stem words
 
         >>> st.stemming("saya suka memakan apple")
-        "saya suka makan apple"
-        >>> st.stemming("saya suka memakan apple", return_type="tokens")
         ["saya","suka","makan","apple"]
+        >>> st.stemming("saya suka memakan apple", return_type="sentences")
+        "saya suka makan apple"
         """
         tokens = self.tokenize(text)
         for token in tokens:
@@ -450,27 +450,27 @@ class CoreTextPreprocessing:
             tokens[index] = self.stemmer.stem(token)
         
         if return_type == "sentences":
-            return self.concate_token(tokens)
+            return self.concat_token(tokens)
         elif return_type == "tokens":
             return [token for token in tokens if token.strip()]
         else:
             raise ValueError("argument "+return_type+" not found")
             
 
-    def case_folding(self, text, return_type="sentences"):
+    def case_folding(self, text, return_type="tokens"):
         """
 
         Args:
           text: str
-          return_type: sentences (Default value = "sentences")
+          return_type: "sentences" or "tokens" (Default value = "tokens")
 
         Returns:
           (str,list): The sentences or tokens with stem words
 
         >>> st.case_folding("saya suka memakan apple")
-        "saya suka memakan apple"
-        >>> st.case_folding("saya suka memakan apple", return_type="tokens")
         ["saya","suka","memakan","apple"]
+        >>> st.case_folding("saya suka memakan apple", return_type="sentences")
+        "saya suka memakan apple"
         """
 
         if return_type == "sentences":
