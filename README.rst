@@ -1,7 +1,30 @@
-# straycat
-A wrapper package for easy implementation of Indonesian NLP
+========
+straycat
+========
 
 
+.. image:: https://img.shields.io/pypi/v/straycat.svg
+        :target: https://pypi.python.org/pypi/straycat
+
+.. image:: https://img.shields.io/travis/hradkafeira/straycat.svg
+        :target: https://travis-ci.com/hradkafeira/straycat
+
+.. image:: https://readthedocs.org/projects/straycat/badge/?version=latest
+        :target: https://straycat.readthedocs.io/en/latest/?version=latest
+        :alt: Documentation Status
+
+
+
+
+Easy NLP implementation for Indonesian Language
+
+
+* Free software: MIT license
+* Documentation: https://straycat.readthedocs.io.
+
+
+Features
+--------
 
 ## Usage
 
@@ -161,7 +184,8 @@ st.auto_text_prep(doc["text"],return_types="list_of_sentences")
 
 # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
 
-st.auto_text_prep(doc["text"],set_process="add_process",process=["medianame_removal","date_removal"])#output [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
+st.auto_text_prep(doc["text"],set_process="add_process",process=["medianame_removal","date_removal"])
+#output [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
 
 st.auto_text_prep(doc["text"],set_process="add_process",process=["medianame_removal","date_removal"],       
@@ -177,3 +201,11 @@ st.auto_text_prep(doc["text"],set_process="customize",process=["medianame_remova
 st.auto_text_prep(doc["text"],set_process="customize",process=["medianame_removal","date_removal"],
                   return_types="list_of_sentences")
 #output ['telah terjadi hari kemerdekaan','ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage

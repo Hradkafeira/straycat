@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+
+"""Tests for `straycat` package."""
+
 from straycat.text_preprocessing.core_text_preprocessing import CoreTextPreprocessing
 
 st=CoreTextPreprocessing()

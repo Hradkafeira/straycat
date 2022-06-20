@@ -1,5 +1,11 @@
+#!/usr/bin/env python
+
+"""Tests for `straycat` package."""
+
 import pytest
+
 from straycat.text_preprocessing.text_preprocessing import TextPreprocessing
+
 import pandas as pd
 
 st = TextPreprocessing()
