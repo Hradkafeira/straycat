@@ -38,7 +38,7 @@ Usage
         st = TextPreprocessing()
 
 Automate text preprocessing with single line of code
-*****************************************************
+****************************************************
 ::
 
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
@@ -200,7 +200,7 @@ Working with dataframe
 
 
 Automate text preprocessing pipeline in dataframe with single line of code
-*****************************************************************
+**************************************************************************
 ::
 
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
