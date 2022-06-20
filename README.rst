@@ -17,7 +17,7 @@ straycat
         :target: https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml
 
 .. image:: https://codecov.io/gh/Hradkafeira/straycat/branch/main/graph/badge.svg?token=6SH3QTEU8D
-      :target: https://codecov.io/gh/Hradkafeira/straycat
+        :target: https://codecov.io/gh/Hradkafeira/straycat
     
 
 Easy NLP implementation for Indonesian Language
@@ -50,6 +50,7 @@ Automate text preprocessing with single line of code
         #Return list of Sentences               
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],return_types="list_of_sentences") 
         #output ['ak suka mkan apel rasa enak']
+
 
 Add more additional text preprocessing pipeline with single line of code
 ************************************************************************
@@ -155,7 +156,6 @@ Use specific text preprocessing task
         st.remove_date("tanggal 03 Maret 2020 17/08/1945 10-11-1945 tanggal",return_type="sentences") 
         #output "tanggal tanggal"
 
-
         # Remove link
 
         st.remove_link("https://www.kompas.com berita hari ini") 
@@ -190,12 +190,10 @@ Working with dataframe
 
         ## Straycat with DataFrame
 
-
         from straycat.text_preprocessing import TextPreprocessing
         import pandas as pd
 
         st = TextPreprocessing()
-
 
         teks = ["tvri.com 14/08/1945 telah terjadi hari kemerdekaan","ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"]
         doc = pd.DataFrame(teks,columns=["text"])
@@ -204,7 +202,7 @@ Working with dataframe
 Automate text preprocessing pipeline in dataframe with single line of code
 *****************************************************************
 ::
-        
+
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
 
         st.auto_text_prep(doc["text"]) 
@@ -213,6 +211,7 @@ Automate text preprocessing pipeline in dataframe with single line of code
 
         st.auto_text_prep(doc["text"],return_types="list_of_sentences")
         #output ['tvri com 14 08 1945 jadi hari merdeka', 'ak suka mkn apel rasa enak']
+
 
 Add more additional text preprocessing pipeline in dataframe with single line of code
 *************************************************************************************
@@ -227,6 +226,7 @@ Add more additional text preprocessing pipeline in dataframe with single line of
         st.auto_text_prep(doc["text"],set_process="add_process",process=["medianame_removal","date_removal"],       
                         return_types="list_of_sentences")
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
+
 
 Customize text preprocessing pipeline in dataframe with single line of code
 ***************************************************************************
