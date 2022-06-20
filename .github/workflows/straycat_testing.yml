@@ -23,6 +23,10 @@ jobs:
     - name: Install dependencies
       run: |
         pip install pytest-cov codecov
+        pip install pandas
+        pip install spacy
+        pip install nltk
+        pip install sastrawi
     # - name: Lint with flake8
     #   run: |
     #     # stop the build if there are Python syntax errors or undefined names
