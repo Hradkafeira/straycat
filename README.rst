@@ -16,6 +16,9 @@ straycat
 .. image:: https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml/badge.svg
         :target: https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml
 
+.. image:: https://codecov.io/gh/Hradkafeira/straycat/branch/main/graph/badge.svg?token=6SH3QTEU8D
+      :target: https://codecov.io/gh/Hradkafeira/straycat
+    
 
 Easy NLP implementation for Indonesian Language
 
