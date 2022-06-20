@@ -16,8 +16,6 @@ straycat
 .. image:: https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml/badge.svg
         :target: https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml
 
-[![straycat_testing](https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml/badge.svg)](https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml)
-
 
 Easy NLP implementation for Indonesian Language
 
