@@ -32,6 +32,7 @@ Usage
 Automatic Text preprocessing with single line of code
 *****************************************************
 ::
+
         from straycat import text_preprocessing as tp
         st=tp.TextProcessing()
 
@@ -69,6 +70,8 @@ Automatic Text preprocessing with single line of code
 
 Use specific text preprocessing pipeline
 ****************************************
+::
+        
         # Tokenize Indonesian Language
 
         st.tokenize("saya sedang memakan apple.")  
