@@ -26,8 +26,11 @@ Easy NLP implementation for Indonesian Language
 Features
 --------
 
-## Usage
+Usage
+*****
 
+Automatic Text preprocessing with single line of code
+*****************************************************
 ::
         from straycat import text_preprocessing as tp
         st=tp.TextProcessing()
@@ -52,7 +55,7 @@ Features
         #output ['saya suka makan apel rasa enak']
 
 
-        # Customize process pipeline
+       # Customize process pipeline
 
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"],
                         set_process="customize",process=["normalize_slang"] )
@@ -64,7 +67,8 @@ Features
         #output ['saya suka makan apel karena rasanya enak ! ! ! 😁 😆 😅']
 
 
-
+Use specific text preprocessing pipeline
+****************************************
         # Tokenize Indonesian Language
 
         st.tokenize("saya sedang memakan apple.")  
@@ -159,6 +163,9 @@ Features
         #encode text
         st.encode_text("Saya \x94sedang makan apple") #output "saya sedang memakan apple"
 
+
+Working with DataFrame
+**********************
 ::
 
         ## Straycat with DataFrame
