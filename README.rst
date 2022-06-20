@@ -28,7 +28,7 @@ Features
 
 ## Usage
 
-```
+``
 from straycat import text_preprocessing as tp
 st=tp.TextProcessing()
 
@@ -159,11 +159,11 @@ st.remove_slang("ak sk mkan", return_type = "sentences")
 #encode text
 st.encode_text("Saya \x94sedang makan apple") #output "saya sedang memakan apple"
 
-```
+``
 
 ## Straycat with DataFrame
 
-```
+``
 from straycat import text_preprocessing as tp
 import pandas as pd
 
@@ -201,6 +201,7 @@ st.auto_text_prep(doc["text"],set_process="customize",process=["medianame_remova
 st.auto_text_prep(doc["text"],set_process="customize",process=["medianame_removal","date_removal"],
                   return_types="list_of_sentences")
 #output ['telah terjadi hari kemerdekaan','ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
+``
 
 Credits
 -------
