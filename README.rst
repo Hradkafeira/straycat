@@ -13,7 +13,10 @@ straycat
         :target: https://straycat.readthedocs.io/en/latest/?version=latest
         :alt: Documentation Status
 
+.. image:: https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml/badge.svg
+        :target: https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml
 
+[![straycat_testing](https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml/badge.svg)](https://github.com/Hradkafeira/straycat/actions/workflows/straycat_testing.yml)
 
 
 Easy NLP implementation for Indonesian Language
@@ -29,7 +32,7 @@ Features
 Usage
 *****
 
-Automatic Text preprocessing with single line of code
+Automate text preprocessing with single line of code
 *****************************************************
 ::
 
@@ -68,10 +71,10 @@ Automatic Text preprocessing with single line of code
         #output ['saya suka makan apel karena rasanya enak ! ! ! 😁 😆 😅']
 
 
-Use specific text preprocessing pipeline
+Use specific text preprocessing task
 ****************************************
 ::
-        
+
         # Tokenize Indonesian Language
 
         st.tokenize("saya sedang memakan apple.")  
@@ -167,7 +170,7 @@ Use specific text preprocessing pipeline
         st.encode_text("Saya \x94sedang makan apple") #output "saya sedang memakan apple"
 
 
-Working with DataFrame
+Working with dataframe
 **********************
 ::
 
