@@ -204,6 +204,7 @@ Working with dataframe
 Automate text preprocessing pipeline in dataframe with single line of code
 *****************************************************************
 ::
+        
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
 
         st.auto_text_prep(doc["text"]) 
