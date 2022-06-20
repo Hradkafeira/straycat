@@ -29,33 +29,46 @@ Features
 
 Usage
 *****
+::
+
+        from straycat.text_preprocessing import TextPreprocessing
+        st = TextPreprocessing()
 
 Automate text preprocessing with single line of code
 *****************************************************
 ::
 
-        from straycat import text_preprocessing as tp
-        st=tp.TextProcessing()
-
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
 
+        # Return list of Tokens
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"]) 
         #output [['ak', 'suka', 'mkan', 'apel', 'rasa', 'enak']]
-                
+
+        #Return list of Sentences               
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],return_types="list_of_sentences") 
         #output ['ak suka mkan apel rasa enak']
 
+Add more additional text preprocessing pipeline with single line of code
+************************************************************************
+::
+
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
 
+        # Return list of Tokens
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                         set_process="add_process",process=["normalize_slang"] )
         #output [['saya', 'suka', 'makan', 'apel', 'rasa', 'enak']]
 
+        # Return list of Sentences
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                         set_process="add_process",process=["normalize_slang"], 
                         return_types="list_of_sentences" )
         #output ['saya suka makan apel rasa enak']
 
+
+Customize text preprocessing pipeline with single line of code
+**************************************************************
+::
 
        # Customize process pipeline
 
@@ -70,7 +83,7 @@ Automate text preprocessing with single line of code
 
 
 Use specific text preprocessing task
-****************************************
+************************************
 ::
 
         # Tokenize Indonesian Language
@@ -175,15 +188,19 @@ Working with dataframe
         ## Straycat with DataFrame
 
 
-        from straycat import text_preprocessing as tp
+        from straycat.text_preprocessing import TextPreprocessing
         import pandas as pd
 
-        st=tp.TextProcessing()
+        st = TextPreprocessing()
 
 
         teks = ["tvri.com 14/08/1945 telah terjadi hari kemerdekaan","ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"]
-        doc=pd.DataFrame(teks,columns=["text"])
+        doc = pd.DataFrame(teks,columns=["text"])
 
+
+Automate text preprocessing pipeline in dataframe with single line of code
+*****************************************************************
+::
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
 
         st.auto_text_prep(doc["text"]) 
@@ -192,6 +209,10 @@ Working with dataframe
 
         st.auto_text_prep(doc["text"],return_types="list_of_sentences")
         #output ['tvri com 14 08 1945 jadi hari merdeka', 'ak suka mkn apel rasa enak']
+
+Add more additional text preprocessing pipeline in dataframe with single line of code
+*************************************************************************************
+::
 
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
 
@@ -202,6 +223,10 @@ Working with dataframe
         st.auto_text_prep(doc["text"],set_process="add_process",process=["medianame_removal","date_removal"],       
                         return_types="list_of_sentences")
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
+
+Customize text preprocessing pipeline in dataframe with single line of code
+***************************************************************************
+::
 
         # Customize pipeline 
 
