@@ -1,22 +1,34 @@
 """Module for That contain Text Preprocessing pipeline"""
 import spacy
-import nltk
 import re
 import json
 import os
 from nltk.tokenize import word_tokenize
-from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from Sastrawi.StopWordRemover.\
+    StopWordRemoverFactory import StopWordRemoverFactory as swsastrawi
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from .count_decorator import counted
 
 
 class CoreTextPreprocessing:
-    """Steps of Text Preprocessing class which contains case folding,encode text, tokenizing,
-    stopwords removal, punctuation removal, stemmming, date removal,
-    normalize slang, link removal, medianame removal, non alnum removal, emoji removal
+    """
+    Steps of Text Preprocessing class which contains:
+    case folding
+    encode text
+    tokenizing
+    stopwords removal
+    punctuation removal
+    stemmming
+    date removal
+    normalize slang
+    link removal
+    medianame removal
+    non alnum removal
+    emoji removal
     """
 
     CALL_SPACY = None
+    CALL_METHODCLASS_STOPWORDS = False
 
     @counted
     def called_spacy(self):
@@ -25,21 +37,17 @@ class CoreTextPreprocessing:
 
     def __init__(
             self,
-            other_stp_words=None,
-            token_lib="spacy",
-            set_stop_words=None):
+            other_stopwords=None,
+            token_lib="spacy"):
         """Constructor which contain set of stopwords
 
         Args:
-        other_stp_words (list,optional): list of stopwords from additional stopwords. (Default value = None)
-        set_stop_words (set, optional): set of stopwords, if any additional, will be merged. (Default value = None)
-        token_lib ("spacy","nltk"): library for tokenize text, (Default value = spacy)
+        other_stopwords (list,optional): other stopwords (Default value = None)
+        token_lib ("spacy","nltk"): tokenize library, (Default value = spacy)
         """
         self.token_lib = token_lib
-        self.other_stp_words = other_stp_words
-        stprf = StopWordRemoverFactory()
         self.stemmer = StemmerFactory().create_stemmer()
-
+        self.other_stopwords = other_stopwords
         # print(self.called_spacy.calls)
         if self.called_spacy.calls == 0:
             self.called_spacy()
@@ -47,45 +55,63 @@ class CoreTextPreprocessing:
             pass
         # print(self.called_spacy.calls)
 
-        if self.other_stp_words is None:
-            self.set_stop_words = set(stprf.get_stop_words())
+        if self.other_stopwords is None:
+            self.stopwords_lib = set(swsastrawi().get_stop_words())
         else:
-            # merge_stp_words=stprf.get_stop_words()+other_stp_words
-            # self.set_stop_words=set([word.lower() for word in merge_stp_words])
-            self.set_stop_words = set([word.lower()
-                                      for word in other_stp_words])
+            try:
+                if type(other_stopwords) == str:
+                    raise ValueError("type must be list")
+                else:
+                    self.stopwords_lib = set([word.lower() for word in other_stopwords])  # noqa:E501
+            except TypeError:
+                raise TypeError("type must be list")
 
     def __repr__(self):
-        if self.other_stp_words is None:
-            return f"Default Stopwords"
+        if self.other_stopwords is None and CoreTextPreprocessing.CALL_METHODCLASS_STOPWORDS is False:  # noqa:E501
+            return "Default Stopwords"
+        elif self.other_stopwords is not None and CoreTextPreprocessing.CALL_METHODCLASS_STOPWORDS is True:  # noqa:E501
+            return "Add Stopwords"
         else:
-            return f"Using other Stopwords"
+            return "Use other Stopwords"
 
     @classmethod
-    def append_stop_words(cls, words=None, filenames=None, delimiter="\n"):
+    def add_stopwords(cls, add_sw=None, filenames=None, delimiter="\n"):
         """Add additional Stopwords from .txt or list
 
         Args:
-          filenames(str, optional): str file will be process delimiter. (Default value = None)
-          words(list, optional): list of stopwords. (Default value = None)
+          filenames(str, optional): filename. (Default value = None)
+          add_sw(list, optional): stopwords list. (Default value = None)
           delimiter: the delimiter of .txt file. (Default value = "\n")
 
         Returns:
           list: list of additional stopwords
 
         """
+        try:
+            stopwords = []
 
-        other_stp_words = []
-        if filenames is not None:
-            with open(filenames) as f:
-                for word in f:
-                    word = word.strip(delimiter)
-                    other_stp_words.append(word)
-        else:
-            for word in words:
-                other_stp_words.append(word)
+            if filenames is not None and add_sw is None:
+                with open(filenames) as f:
+                    for word in f:
+                        word = word.strip(delimiter)
+                        stopwords.append(word)
+            elif filenames is None and add_sw is not None:
+                if type(add_sw) == str:
+                    raise ValueError("type must be list")
+                else:
+                    for word in add_sw:
+                        stopwords.append(word)
+            else:
+                raise ValueError("can't filled both of arguments")
 
-        return cls(other_stp_words)
+            stopwords_lib = set(swsastrawi().get_stop_words() + stopwords)
+
+            CoreTextPreprocessing.CALL_METHODCLASS_STOPWORDS = True
+
+            return cls(stopwords_lib)
+
+        except TypeError:
+            raise TypeError("type must be list")
 
     def encode_text(self, text):
         """Encode the text
@@ -117,7 +143,7 @@ class CoreTextPreprocessing:
             tokens = CoreTextPreprocessing.CALL_SPACY(text)
             return [token.text for token in tokens]
         elif self.token_lib == "nltk":
-            return nltk.tokenize.word_tokenize(text)
+            return word_tokenize(text)
         else:
             raise ValueError("library not found")
 
@@ -140,7 +166,7 @@ class CoreTextPreprocessing:
         kalimat = kalimat.strip(" ")
         return kalimat
 
-    def normalize_slang(self, text,return_type="tokens"):
+    def normalize_slang(self, text, return_type="tokens"):
         """Remove slang words from text
 
         Args:
@@ -184,7 +210,8 @@ class CoreTextPreprocessing:
 
         >>> st.remove_medianame("kompas.com berita hari ini")
         ["berita", "hari", "ini"]
-        >>> st.remove_medianame("kompas.com berita hari ini", return_type = "sentences")
+        >>> st.remove_medianame("kompas.com berita hari ini",
+                                return_type = "sentences")
         "berita hari ini"
         """
         list_media = []
@@ -195,9 +222,9 @@ class CoreTextPreprocessing:
         regex = "\\w*.com|\\w*.tv|\\w*.co|\\w*.id|"
         for word in list_media:
             regex += word + "|"
-        
-        text=re.sub(regex, "", text.lower())
-        text=" ".join(text.split())
+
+        text = re.sub(regex, "", text.lower())
+        text = " ".join(text.split())
 
         if return_type == "sentences":
             return text
@@ -206,8 +233,7 @@ class CoreTextPreprocessing:
         else:
             raise ValueError("argument "+return_type+" not found")
 
-
-    def remove_link(self, text,return_type="tokens"):
+    def remove_link(self, text, return_type="tokens"):
         """
 
         Args:
@@ -219,12 +245,16 @@ class CoreTextPreprocessing:
 
         >>> st.remove_link("https://www.kompas.com berita hari ini")
         ["berita", "hari", "ini"]
-        >>> st.remove_link("https://www.kompas.com berita hari ini", return_type = "sentences")
+        >>> st.remove_link("https://www.kompas.com berita hari ini",
+                            return_type = "sentences")
         "berita hari ini"
         """
 
         # all link only
-        regex = "(?:(?:https?|ftp|file):\\/\\/|www\\.|ftp\\.|[A-Za-z]+\\.|[A-Za-z]+\\d+\\.)(?:\\([-A-Z0-9+&@#\\/%=~_|$?!:,.]*\\)|[-A-Z0-9+&@#\\/%=~_|$?!:,.])*(?:\\([-A-Z0-9+&@#\\/%=~_|$?!:,.]*\\)|[A-Z0-9+&@#\\/%=~_|$])"
+        regex = "(?:(?:https?|ftp|file):\\/\\/|www\\.|ftp\\.|[A-Za-z]+\\.|" + \
+                "[A-Za-z]+\\d+\\.)(?:\\([-A-Z0-9+&@#\\/%=~_|$?!:,.]*\\)|" + \
+                "[-A-Z0-9+&@#\\/%=~_|$?!:,.])" + \
+                "*(?:\\([-A-Z0-9+&@#\\/%=~_|$?!:,.]*\\)|[A-Z0-9+&@#\\/%=~_|$])"
 
         # all link and domain like 255.255.
         # regex =
@@ -237,13 +267,13 @@ class CoreTextPreprocessing:
         text = " ".join(text.split())
 
         if return_type == "sentences":
-            return text 
+            return text
         elif return_type == "tokens":
             return self.tokenize(text)
         else:
             raise ValueError("argument "+return_type+" not found")
 
-    def remove_date(self, text,return_type="tokens"):
+    def remove_date(self, text, return_type="tokens"):
         """Remove date from document
 
         Args:
@@ -253,9 +283,10 @@ class CoreTextPreprocessing:
         Returns:
           (str,list): The sentences or tokens without date
 
-        >>> st.remove_date("tanggal 03 Maret 2020 17/08/1945 10-11-1945 tanggal")
+        >>> st.remove_date("tanggal 03 Mei 2020 17/08/1945 10-11-1945 tanggal")
         ["tanggal", "tanggal"]
-        >>> st.remove_date("tanggal 03 Maret 2020 17/08/1945 10-11-1945 tanggal",return_type="sentences")
+        >>> st.remove_date("tanggal 03 Mei 2020 17/08/1945 10-11-1945 tanggal",
+                            return_type="sentences")
         "tanggal tanggal"
         """
 
@@ -294,8 +325,8 @@ class CoreTextPreprocessing:
         regex = "\\d{2}\\W\\d{2}\\W\\d{4}|\\d+\\W(?:" + \
             str_month + ")\\W\\d{4}"
 
-        text=re.sub(regex, "", text.lower())
-        text=" ".join(text.split())
+        text = re.sub(regex, "", text.lower())
+        text = " ".join(text.split())
 
         if return_type == "sentences":
             return text
@@ -304,9 +335,8 @@ class CoreTextPreprocessing:
         else:
             raise ValueError("argument "+return_type+" not found")
 
-
-    def remove_emoji(self, text,return_type="tokens"):
-        """
+    def remove_emoji(self, text, return_type="tokens"):
+        """Remove emoji from text
 
         Args:
           text: str
@@ -317,7 +347,8 @@ class CoreTextPreprocessing:
 
         >>> st.remove_emoji("hahaha 😀 😃 😄 hahaha 😁 😆 😅 hahaha")
         ["hahaha","hahaha","hahaha"]
-        >>> st.remove_emoji("hahaha 😀 😃 😄 hahaha 😁 😆 😅 hahaha", return_type="sentences")
+        >>> st.remove_emoji("hahaha 😀 😃 😄 hahaha 😁 😆 😅 hahaha",
+                            return_type="sentences")
         "hahaha hahaha hahaha"
         """
         regex = re.compile("["
@@ -334,7 +365,7 @@ class CoreTextPreprocessing:
             if re.match(regex, token) is not None:
                 index = tokens.index(token)
                 tokens[index] = ''
-        
+
         if return_type == "sentences":
             return self.concat_token(tokens)
         elif return_type == "tokens":
@@ -342,9 +373,8 @@ class CoreTextPreprocessing:
         else:
             raise ValueError("argument "+return_type+" not found")
 
-
-    def stop_words(self, text,return_type="tokens"):
-        """remove stopwords from the documents
+    def stop_words(self, text, return_type="tokens"):
+        """Remove stopwords from the documents
 
         Args:
           text: str
@@ -360,7 +390,7 @@ class CoreTextPreprocessing:
         """
         tokens = self.tokenize(text)
         for token in tokens:
-            if token in self.set_stop_words:
+            if token in self.stopwords_lib:
                 index = tokens.index(token)
                 tokens[index] = ''
         if return_type == "sentences":
@@ -382,7 +412,8 @@ class CoreTextPreprocessing:
 
         >>> st.remove_punc("dapat hubungi akun@google !!!")
         ["dapat","hubungi","akun@google"]
-        >>> st.remove_punc("dapat hubungi akun@google !!!", return_type="sentences")
+        >>> st.remove_punc("dapat hubungi akun@google !!!",
+                            return_type="sentences")
         "dapat hubungi akun@google"
         """
 
@@ -411,25 +442,26 @@ class CoreTextPreprocessing:
 
         >>> st.remove_non_alnum("dapat hubungi akun@google !!!")
         ["dapat","hubungi"]
-        >>> st.remove_non_alnum("dapat hubungi akun@google !!!", return_type="sentences")
+        >>> st.remove_non_alnum("dapat hubungi akun@google !!!",
+                                return_type="sentences")
         "dapat hubungi"
         """
 
         tokens = self.tokenize(text)
         for token in tokens:
-            if token.isalnum() == False:
+            if token.isalnum() is False:
                 # if re.match("\n",token) != None:
                 index = tokens.index(token)
                 tokens[index] = ''
-        
+
         if return_type == "sentences":
-           return self.concat_token(tokens)
+            return self.concat_token(tokens)
         elif return_type == "tokens":
-           return [token for token in tokens if token.strip()]
+            return [token for token in tokens if token.strip()]
         else:
             raise ValueError("argument "+return_type+" not found")
-            
-    def stemming(self, text,return_type="tokens"):
+
+    def stemming(self, text, return_type="tokens"):
         """Stemming the sentences to stem words
 
         Args:
@@ -448,14 +480,13 @@ class CoreTextPreprocessing:
         for token in tokens:
             index = tokens.index(token)
             tokens[index] = self.stemmer.stem(token)
-        
+
         if return_type == "sentences":
             return self.concat_token(tokens)
         elif return_type == "tokens":
             return [token for token in tokens if token.strip()]
         else:
             raise ValueError("argument "+return_type+" not found")
-            
 
     def case_folding(self, text, return_type="tokens"):
         """

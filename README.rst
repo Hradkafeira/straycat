@@ -35,7 +35,15 @@ Usage
 ::
 
         from straycat.text_preprocessing import TextPreprocessing
+
+        # Instatiation with default stopwords
         st = TextPreprocessing()
+
+        # Instatiation with your own stopwords
+        st = TextPreprocessing(other_stopwords=["sw1", "sw2", "etc"])
+
+        # Instatiation with combine default stopwords and your stopwords
+        st = TextPreprocessing.add_stopwords(["sw1", "sw2", "etc"])
 
 Automate text preprocessing with single line of code
 ****************************************************
@@ -181,14 +189,15 @@ Use specific text preprocessing task
         #output "saya suka makan"
 
         #encode text
-        st.encode_text("Saya \x94sedang makan apple") #output "saya sedang memakan apple"
+        st.encode_text("Saya \x94sedang makan apple") 
+        #output "saya sedang memakan apple"
 
 
 Working with dataframe
 **********************
 ::
 
-        ## Straycat with DataFrame
+        # Straycat with DataFrame
 
         from straycat.text_preprocessing import TextPreprocessing
         import pandas as pd
@@ -209,7 +218,7 @@ Automate text preprocessing pipeline in dataframe with single line of code
         #output [['tvri', 'com', '14', '08', '1945', 'jadi', 'hari', 'merdeka'],
         ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
-        st.auto_text_prep(doc["text"],return_types="list_of_sentences")
+        st.auto_text_prep(doc["text"], return_types="list_of_sentences")
         #output ['tvri com 14 08 1945 jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
 
@@ -219,11 +228,11 @@ Add more additional text preprocessing pipeline in dataframe with single line of
 
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
 
-        st.auto_text_prep(doc["text"],set_process="add_process",process=["medianame_removal","date_removal"])
+        st.auto_text_prep(doc["text"], set_process="add_process", process=["medianame_removal","date_removal"])
         #output [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
 
-        st.auto_text_prep(doc["text"],set_process="add_process",process=["medianame_removal","date_removal"],       
+        st.auto_text_prep(doc["text"], set_process="add_process", process=["medianame_removal","date_removal"],       
                         return_types="list_of_sentences")
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
@@ -234,11 +243,11 @@ Customize text preprocessing pipeline in dataframe with single line of code
 
         # Customize pipeline 
 
-        st.auto_text_prep(doc["text"],set_process="customize",process=["medianame_removal","date_removal"])
+        st.auto_text_prep(doc["text"], set_process="customize", process=["medianame_removal","date_removal"])
         #output [['telah', 'terjadi', 'hari', 'kemerdekaan'],
                 ['ak','suka','mkn','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
 
-        st.auto_text_prep(doc["text"],set_process="customize",process=["medianame_removal","date_removal"],
+        st.auto_text_prep(doc["text"], set_process="customize", process=["medianame_removal","date_removal"],
                         return_types="list_of_sentences")
         #output ['telah terjadi hari kemerdekaan','ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
 

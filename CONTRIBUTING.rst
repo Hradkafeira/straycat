@@ -111,7 +111,7 @@ Tips
 
 To run a subset of tests::
 
-$ pytest tests.test_straycat
+$ pytest tests/module_directory/test_file.py
 
 
 Deploying

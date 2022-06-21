@@ -8,4 +8,4 @@ __author__ = """Arief Akbar Hidayat"""
 __email__ = 'hidayat.ariefakbar@gmail.com'
 __version__ = '0.1.6'
 
-from . import text_preprocessing
+from . import text_preprocessing  # noqa:F401
