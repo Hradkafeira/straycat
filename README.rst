@@ -2,6 +2,10 @@
 straycat
 ========
 
+.. include:: docs/installation.rst
+
+.. image:: assets/straycat_logo.png
+  :width: 400
 
 .. image:: https://img.shields.io/pypi/v/straycat.svg
         :target: https://pypi.python.org/pypi/straycat
