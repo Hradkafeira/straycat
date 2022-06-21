@@ -2,8 +2,6 @@
 straycat
 ========
 
-.. include:: docs/installation.rst
-
 .. image:: assets/straycat_logo.png
   :width: 400
 
@@ -31,9 +29,23 @@ Easy NLP implementation for Indonesian Language
 * Documentation: https://straycat.readthedocs.io.
 
 
+.. include:: docs/installation.rst
+
 Features
 --------
-
+- Automate Text Preprocessing 
+- Automate Text Preprocessing With pandas
+- Tokenization
+- Stemming
+- Stopwords 
+- Remove Punctuation
+- Remove emoji
+- Remove non alpha numerik
+- Remove link
+- Remove date
+- Remove Medianame
+- Normalize slang words
+ 
 Usage
 *****
 ::
