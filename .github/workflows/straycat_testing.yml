@@ -27,7 +27,7 @@ jobs:
         pip install spacy
         pip install nltk
         pip install sastrawi
-        pip install 
+        pip install flake8
     # - name: Lint with flake8
     #   run: |
     #     # stop the build if there are Python syntax errors or undefined names
@@ -36,7 +36,9 @@ jobs:
     #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
+        flake8 straycat tests
         coverage run -m pytest tests/
+        
 
     - name: Codecov python
       uses: codecov/codecov-action@v2.1.0
