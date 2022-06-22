@@ -44,8 +44,6 @@ Features
 - Normalize slang words
 
 
-.. highlight:: shell
-
 ============
 Installation
 ============
