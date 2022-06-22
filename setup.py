@@ -33,7 +33,6 @@ setup(
 
     ],
     description="Easy NLP implementation for Indonesian Language",
-    data_files=[('assets', ['straycat_logo.png'])],
     install_requires=requirements,
     license="MIT license",
     long_description=readme + '\n\n' + history,

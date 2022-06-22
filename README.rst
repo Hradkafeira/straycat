@@ -2,7 +2,7 @@
 straycat
 ========
 
-.. image:: assets/straycat_logo.png
+.. image:: https://github.com/Hradkafeira/straycat/blob/main/assets/straycat_logo.png
   :width: 400
 
 .. image:: https://img.shields.io/pypi/v/straycat.svg
