@@ -30,8 +30,8 @@ Easy NLP implementation for Indonesian Language
 
 Features
 --------
-- Automate Text Preprocessing 
-- Automate Text Preprocessing With pandas
+- Automate Text Preprocessing Pipeline
+- Automate Text Preprocessing Pipeline With pandas
 - Tokenization
 - Stemming
 - Stopwords 
@@ -61,41 +61,6 @@ To install straycat, run this command in your terminal:
     $ pip install straycat
 
 This is the preferred method to install straycat, as it will always install the most recent stable release.
-
-If you don't have `pip`_ installed, this `Python installation guide`_ can guide
-you through the process.
-
-.. _pip: https://pip.pypa.io
-.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
-
-
-From sources
-------------
-
-The sources for straycat can be downloaded from the `Github repo`_.
-
-You can either clone the public repository:
-
-.. code-block:: console
-
-    $ git clone git://github.com/hradkafeira/straycat
-
-Or download the `tarball`_:
-
-.. code-block:: console
-
-    $ curl -OJL https://github.com/hradkafeira/straycat/tarball/master
-
-Once you have a copy of the source, you can install it with:
-
-.. code-block:: console
-
-    $ python setup.py install
-
-
-.. _Github repo: https://github.com/hradkafeira/straycat
-.. _tarball: https://github.com/hradkafeira/straycat/tarball/master
-
 
 Usage
 *****
@@ -260,7 +225,7 @@ Use specific text preprocessing task
         #output "saya sedang memakan apple"
 
 
-Working with dataframe
+WORKING WITH DATAFRAME
 **********************
 ::
 
@@ -269,8 +234,14 @@ Working with dataframe
         from straycat.text_preprocessing import TextPreprocessing
         import pandas as pd
 
+        # Instatiation with default stopwords
         st = TextPreprocessing()
 
+        # Instatiation with your own stopwords
+        st = TextPreprocessing(other_stopwords=["sw1", "sw2", "etc"])
+
+        # Instatiation with combine default stopwords and your stopwords
+        st = TextPreprocessing.add_stopwords(["sw1", "sw2", "etc"])
         teks = ["tvri.com 14/08/1945 telah terjadi hari kemerdekaan","ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"]
         doc = pd.DataFrame(teks,columns=["text"])
 
