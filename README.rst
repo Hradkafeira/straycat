@@ -52,7 +52,6 @@ Installation
 Stable release
 --------------
 
-<<<<<<< HEAD
 To install straycat, run this command in your terminal:
 
 .. code-block:: console
