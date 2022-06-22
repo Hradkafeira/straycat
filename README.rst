@@ -49,7 +49,7 @@ Installation
 ============
 
 
-Stable release
+Testing release
 --------------
 
 
