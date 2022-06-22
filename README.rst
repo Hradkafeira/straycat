@@ -52,6 +52,7 @@ Installation
 Stable release
 --------------
 
+<<<<<<< HEAD
 To install straycat, run this command in your terminal:
 
 .. code-block:: console
@@ -59,6 +60,8 @@ To install straycat, run this command in your terminal:
     $ pip install straycat
 
 This is the preferred method to install straycat, as it will always install the most recent stable release.
+
+=======
 
 Usage
 *****
