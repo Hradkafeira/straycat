@@ -56,7 +56,7 @@ Installation
 Testing release
 --------------
 
-To install straycat (, run this command in your terminal:
+To install straycat, run this command in your terminal:
 
 .. code-block:: console
 
@@ -76,10 +76,10 @@ Usage
         # Instatiation with your own stopwords
         st = TextPreprocessing(other_stopwords=["sw1", "sw2", "etc"])
 
-        # Instatiation with combine default stopwords and your stopwords
+        # Instatiation by combining default stopwords and your stopwords
         st = TextPreprocessing.add_stopwords(["sw1", "sw2", "etc"])
 
-        #See available pipelines before using it
+        # See available pipelines before using it
         print(st.list_process)
         #output
         
@@ -108,7 +108,7 @@ Automate text preprocessing with call one method
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"]) 
         #output [['ak', 'suka', 'mkan', 'apel', 'rasa', 'enak']]
 
-        #Return list of Sentences               
+        # Return list of Sentences               
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],return_types="list_of_sentences") 
         #output ['ak suka mkan apel rasa enak']
 
@@ -295,10 +295,10 @@ WORKING WITH DATAFRAME
         # Instatiation with your own stopwords
         st = TextPreprocessing(other_stopwords=["sw1", "sw2", "etc"])
 
-        # Instatiation with combine default stopwords and your stopwords
+        # Instatiation by combining default stopwords and your stopwords
         st = TextPreprocessing.add_stopwords(["sw1", "sw2", "etc"])
 
-        #See available pipelines before using it
+        # See available pipelines before using it
         print(st.list_process)
         #output
         
