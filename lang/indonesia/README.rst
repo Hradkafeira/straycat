@@ -1,8 +1,8 @@
 ========
-straycat
+STRAYCAT
 ========
 
-.. image:: assets/straycat_logo.png
+.. image:: https://github.com/Hradkafeira/straycat/blob/straycat_dev/assets/straycat_logo.png?raw=true
   :width: 400
 
 .. image:: https://img.shields.io/pypi/v/straycat.svg
@@ -20,66 +20,72 @@ straycat
 
 .. image:: https://codecov.io/gh/Hradkafeira/straycat/branch/main/graph/badge.svg?token=6SH3QTEU8D
         :target: https://codecov.io/gh/Hradkafeira/straycat
+        
+.. raw:: html
+
+  <p align="left">
+  <a href="https://github.com/difo-n8r/straycat/tree/straycat_dev">English</a> |
+  <span>Bahasa</span>
     
 
-Easy NLP implementation for Indonesian Language
+Implementasi NLP sederhana untuk Bahasa Indonesia
 
 
 * Free software: MIT license
 * Documentation: https://straycat.readthedocs.io.
 
-Features
+Fitur-fitur
 --------
-- Automate Text Preprocessing Pipeline
-- Automate Text Preprocessing Pipeline With pandas
+- Otomatisasi Text Preprocessing Pipeline
+- Otomatisasi Text Preprocessing Pipeline dengan pandas
 - Tokenization
 - Stemming
 - Stopwords 
-- Remove Punctuation
-- Remove emoji
-- Remove non alpha numerik
-- Remove link
-- Remove date
-- Remove Medianame
-- Normalize slang words
+- Menghapus Punctuation
+- Menghapus emoji
+- Menghapus non alpha numeric
+- Menghapus link
+- Menghapus tanggal
+- Menghapus Medianame
+- Normalisasi kata-kata tidak baku
 
 
 ============
-Installation
+Instalasi
 ============
 
 Testing release
 --------------
 
-To install straycat (, run this command in your terminal:
+Untuk instalasi straycat, Jalankan perintah ini di terminal:
 
 .. code-block:: console
 
     $ pip install -i https://test.pypi.org/simple/ straycat
 
-This is the preferred method to install straycat in developer mode.
+Ini metode yang direkomendasikan untuk menginstall straycat di mode developer.
 
-Usage
+Penggunaan
 *****
 ::
 
         from straycat.text_preprocessing import TextPreprocessing
 
-        # Instatiation with default stopwords
+        # Instansiasi dengan stopwords default
         st = TextPreprocessing()
 
-        # Instatiation with your own stopwords
+        # Instansiasi dengan stopwords custom
         st = TextPreprocessing(other_stopwords=["sw1", "sw2", "etc"])
 
-        # Instatiation with combine default stopwords and your stopwords
+        # Instansiasi dengan menggabungkan stopwords default dan stopwords custom.
         st = TextPreprocessing.add_stopwords(["sw1", "sw2", "etc"])
 
-        #See available pipelines before using it
+        # Melihat pipelines yang tersedia.
         print(st.list_process)
         #output
         
-        Here the list for auto_text_prep
-        Input value with number or text
+        Berikut list untuk auto_text_prep
+        Input value dengan nomor atau teks.
         1  or "case_folding"
         2  or "punctuation_removal"
         3  or "stopwords_removal"
@@ -92,48 +98,48 @@ Usage
         10 or "normalize_slang"
         11 or "date_removal"
 
-Automate text preprocessing with call one method
+Otomatisasi preprocessing teks dengan metode sekali panggil.
 ************************************************
 ::
 
-        # Automate Text Preprocessing with default pipelines 
+        # Otomatisasi dengan pipeline default 
         (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
 
-        # Return list of Tokens
+        # Mengembalikan list dari Token
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"]) 
         #output [['ak', 'suka', 'mkan', 'apel', 'rasa', 'enak']]
 
-        #Return list of Sentences               
+        # Mengembalikan list dari kalimat           
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],return_types="list_of_sentences") 
         #output ['ak suka mkan apel rasa enak']
 
-Add more additional text preprocessing pipeline with call one method
+Menambahkan lagi tambahan pipeline preprocessing teks dengan metode sekali panggil
 ********************************************************************
 ::
 
-        # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
+        # Menambahkan lebih banyak pipeline (Normalisasi kata tidak baku, menghapus tanggal, menghapus emoji, menghapus medianame, menghapus link, dan menghapus non alnum)
 
-        # Return list of Tokens with number args of process
+        # Mengembalikan list dari token dengan banyak args dari proses
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                         set_process="add_process",
                         process=[10])
         #output [['saya', 'suka', 'makan', 'apel', 'rasa', 'enak']]
 
-        # Return list of Tokens with name args of process
+        # Mengembalikan list dari Tokens dengan nama args dari proses
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                           set_process="add_process",
                           input_proc="name",
                           process=["normalize_slang"])
         #output [['saya', 'suka', 'makan', 'apel', 'rasa', 'enak']]
 
-        # Return list of Sentences with number args of process
+        # Mengembalikan list dari kalimat dengan beberapa args dari proses
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                           set_process="add_process",
                           process=[10], 
                           return_types="list_of_sentences" )
         #output ['saya suka makan apel rasa enak']
 
-        # Return list of Sentences with name args of process
+        # Mengembalikan list dari kalimat-kalimat dengan nama args dari proses
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                           set_process="add_process",
                           input_proc="name",
@@ -141,33 +147,33 @@ Add more additional text preprocessing pipeline with call one method
                           return_types="list_of_sentences" )
         #output ['saya suka makan apel rasa enak']
 
-Customize text preprocessing pipeline with call one method
+Memodifikasi pipeline preprocessing teks dengan memanggil satu metode
 **********************************************************
 ::
 
-       # Customize process pipeline
+       # Memodifikasi pipeline proses
 
-        # Return list of Tokens with number args of process
+        # Mengembalikan list dari token dengan beberapa args dari proses
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                         set_process="customize",
                         process=[10])
         #output [['saya','suka','makan','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
 
-        # Return list of Tokens with name args of process
+        # Mengembalikan list dari token dengan nama args dari proses
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                           set_process="customize",
                           input_proc="name",
                           process=["normalize_slang"])
         #output [['saya','suka','makan','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
 
-        # Return list of Sentences with number args of process
+        # Mengembalikan list dari kalimat-kalimat dengan beberapa args dari proses
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
                           set_process="customize",
                           process=[10], 
                           return_types="list_of_sentences" )
         #output ['saya suka makan apel karena rasanya enak ! ! ! 😁 😆 😅']
 
-        # Return list of Sentences with name args of process
+        # Mengembalikan list dari kalimat dengan nama args dari proses
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"],
                         set_process="customize",
                         input_proc="name",
@@ -176,21 +182,21 @@ Customize text preprocessing pipeline with call one method
         #output ['saya suka makan apel karena rasanya enak ! ! ! 😁 😆 😅']
 
 
-Use specific text preprocessing task
+Menggunakan penugasan preprocessing yang spesifik
 ************************************
 ::
 
-        # Tokenize Indonesian Language
+        # Tokenisasi bahasa Indonesia
 
         st.tokenize("saya sedang memakan apple.")  
         #output ["saya", "sedang", "memakan", "apple","."]
 
-        # Concatenate Tokens
+        # Menggabungkan token-token
 
         st.concat_token(["saya", "sedang", "memakan", "apple"]) 
         #output "saya sedang memakan apple"
 
-        # Stemming Indonesia Language
+        # Stemming bahasa Indonesia
 
         st.stemming("saya suka memakan apple") 
         #output ["saya","suka","makan","apple"]
@@ -206,7 +212,7 @@ Use specific text preprocessing task
         st.case_folding("Proses Teks Preprocessing", return_type="sentences") 
         #output "proses teks preprocessing"
 
-        # Stopwords Removal
+        # Menghapus Stopwords
 
         st.stop_words("apel yang terlihat lezat") 
         #output ["apel","terlihat","lezat"]
@@ -214,7 +220,7 @@ Use specific text preprocessing task
         st.stop_words("apel yang terlihat lezat",return_type="sentences") 
         #output "apel terlihat lezat"
 
-        # Punctuation Removal
+        # Menghapus Tanda baca 
 
         st.remove_punc("dapat hubungi akun@google !!!"") 
         #output ["dapat","hubungi","akun@google"]
@@ -222,7 +228,7 @@ Use specific text preprocessing task
         st.remove_punc("dapat hubungi akun@google !!!"", return_type="sentences") 
         #output "dapat hubungi akun@google"
 
-        # Non Alnum Removal
+        # Menghapus Non Alnum
 
         st.remove_non_alnum("dapat hubungi akun@google !!!") 
         #output ["dapat","hubungi"]
@@ -230,7 +236,7 @@ Use specific text preprocessing task
         st.remove_non_alnum("dapat hubungi akun@google !!!", return_type="sentences") 
         #output "dapat hubungi"
 
-        # Remove emoji
+        # Menghapus emoji
 
         st.remove_emoji("hahaha 😀 😃 😄 hahaha 😁 😆 😅 hahaha") 
         #output ["hahaha","hahaha","hahaha"]
@@ -238,7 +244,7 @@ Use specific text preprocessing task
         st.remove_emoji("hahaha 😀 😃 😄 hahaha 😁 😆 😅 hahaha", return_type="sentences") 
         #output "hahaha hahaha hahaha"
 
-        # Remove date
+        # Menghapus tanggal
 
         st.remove_date("tanggal 03 Maret 2020 17/08/1945 10-11-1945 tanggal") 
         #output ["tanggal", "tanggal"]
@@ -246,7 +252,7 @@ Use specific text preprocessing task
         st.remove_date("tanggal 03 Maret 2020 17/08/1945 10-11-1945 tanggal",return_type="sentences") 
         #output "tanggal tanggal"
 
-        # Remove link
+        # Menghapus link
 
         st.remove_link("https://www.kompas.com berita hari ini") 
         #output ["berita", "hari", "ini"]
@@ -254,7 +260,7 @@ Use specific text preprocessing task
         st.remove_link("https://www.kompas.com berita hari ini", return_type = "sentences") 
         #output "berita hari ini"
 
-        # Remove media name
+        # Menghapus nama media
 
         st.remove_medianame("kompas.com berita hari ini") 
         #output ["berita", "hari", "ini"]
@@ -262,7 +268,7 @@ Use specific text preprocessing task
         st.remove_medianame("kompas.com berita hari ini", return_type = "sentences") 
         #output "berita hari ini"
 
-        # Normalize slang
+        # normalisasi kata tidak baku
 
         st.remove_slang("ak sk mkan") 
         #output ["saya", "suka", "makan"]
@@ -270,35 +276,35 @@ Use specific text preprocessing task
         st.remove_slang("ak sk mkan", return_type = "sentences") 
         #output "saya suka makan"
 
-        #encode text
+        #encode teks
         st.encode_text("Saya \x94sedang makan apple") 
         #output "saya sedang memakan apple"
 
 
-WORKING WITH DATAFRAME
+MENGGUNAKAN DATAFRAME
 **********************
 ::
 
-        # Straycat with DataFrame
+        # Straycat dengan DataFrame
 
         from straycat.text_preprocessing import TextPreprocessing
         import pandas as pd
 
-        # Instatiation with default stopwords
+        # Instantiasi dengan stopword default
         st = TextPreprocessing()
 
-        # Instatiation with your own stopwords
+        # Instantiasi dengan stopword custom
         st = TextPreprocessing(other_stopwords=["sw1", "sw2", "etc"])
 
-        # Instatiation with combine default stopwords and your stopwords
+        # Instantiasi dengan stopword default dan stopword custom
         st = TextPreprocessing.add_stopwords(["sw1", "sw2", "etc"])
 
-        #See available pipelines before using it
+        # Melihat pipeline yang tersedia
         print(st.list_process)
         #output
         
-        Here the list for auto_text_prep
-        Input value with number or text
+        Berikut list untuk auto_text_prep
+        Input value dengan nomor atau teks
         1  or "case_folding"
         2  or "punctuation_removal"
         3  or "stopwords_removal"
@@ -314,63 +320,63 @@ WORKING WITH DATAFRAME
         teks = ["tvri.com 14/08/1945 telah terjadi hari kemerdekaan","ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"]
         doc = pd.DataFrame(teks,columns=["text"])
 
-Automate text preprocessing pipeline in dataframe with call one method
+Otomatisasi pipeline preprocessing teks di dalam dataframe dengan metode sekali panggil
 **********************************************************************
 ::
 
-        # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
+        # Otomatisasi preprocessing teks dengan pipeline default(Tokenisasi, case folding, hapus tanda baca, menghapus stopwords, stemming)
 
-        # Return list of Tokens
+        # Mengembalikan list dari token
         st.auto_text_prep(doc["text"]) 
         #output [['tvri', 'com', '14', '08', '1945', 'jadi', 'hari', 'merdeka'],
         ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
-        # Return list of Sentences
+        # Mengembalikan list dari kalimat
         st.auto_text_prep(doc["text"], return_types="list_of_sentences")
         #output ['tvri com 14 08 1945 jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
 
-Add more additional text preprocessing pipeline in dataframe with call one method
+Menambahkan lagi pipeline teks preprocessing tambahan di dalam dataframe dengan metode sekali panggil
 *********************************************************************************
 ::
 
-        # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
+        # Add more additional pipeline (normalisasi kata tidak baku, menghapus tanggal, menghapus emoji, menghapus nama media, menghapus link, menghapus non alnum )
 
-        # Return list of Tokens with number args of process
+        # Mengembalikan list dari Token dengan beberapa args dari proses
         st.auto_text_prep(doc["text"], set_process="add_process", process=[6, 11])
         #output [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
-        # Return list of Tokens with name args of process
+        # Mengembalikan list dari token dengan nama args dari proses
         st.auto_text_prep(doc["text"], set_process="add_process",
                           input_proc="name",
                           process=["medianame_removal","date_removal"])
         #output [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
-        # Return list of Sentences with name args of process
+        # Mengembalikan list dari kalimat dengan nama args dari proses
         st.auto_text_prep(doc["text"], set_process="add_process", 
                           process=[6, 11],       
                         return_types="list_of_sentences")
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
-        # Return list of Sentences with name args of process
+        # Mengembalikan list dari kalimat dengan nama args dari proses
         st.auto_text_prep(doc["text"], set_process="add_process",
                           input_proc="name",
                           process=["medianame_removal","date_removal"],       
                           return_types="list_of_sentences")
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
-Customize text preprocessing pipeline in dataframe with call one method
+Memodifikasi pipeline preprocessing teks di dalam dataframe dengan metode sekali panggil
 ***********************************************************************
 ::
 
-        # Customize pipeline 
+        # Memodifikasi pipeline 
 
-        # Return list of Tokens with number args of process
+        # Mengembalikan list dari token dengan beberapa args dari proses
         st.auto_text_prep(doc["text"], set_process="customize", process=[6, 11])
         #output [['telah', 'terjadi', 'hari', 'kemerdekaan'],
                 ['ak','suka','mkn','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
 
-        # Return list of Tokens with name args of process
+        # Mengembalikan list dari token dengan nama args dari proses
         st.auto_text_prep(doc["text"], set_process="customize", 
                           input_proc="name",
                           process=["medianame_removal","date_removal"])
@@ -378,23 +384,23 @@ Customize text preprocessing pipeline in dataframe with call one method
                 ['ak','suka','mkn','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
 
 
-        # Return list of Sentences with number args of process
+        # Mengembalikan list dari kalimat dengan beberapa args dari proses
         st.auto_text_prep(doc["text"], set_process="customize",
                           process=[6, 11],
                         return_types="list_of_sentences")
         #output ['telah terjadi hari kemerdekaan','ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
 
-        # Return list of Sentences with name args of process
+        # Mengembalikan list dari kalimat-kalimat dengan nama args dari proses
         st.auto_text_prep(doc["text"], set_process="customize",
                           input_proc="name", 
                           process=["medianame_removal","date_removal"],
                           return_types="list_of_sentences")
         #output ['telah terjadi hari kemerdekaan','ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
 
-Credits
+Kredit
 -------
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+Package dibuat dengan Cookiecutter_ dan template proyek `audreyr/cookiecutter-pypackage`_.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
