@@ -53,7 +53,7 @@ Testing release
 --------------
 
 
-To install straycat (development), run this command in your terminal:
+To install straycat (, run this command in your terminal:
 
 .. code-block:: console
 
@@ -96,7 +96,7 @@ Usage
         11 or "date_removal"
 
 Automate text preprocessing with only one method
-****************************************************
+************************************************
 ::
 
         # Automate Text Preprocessing with default pipelines 
@@ -110,8 +110,8 @@ Automate text preprocessing with only one method
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],return_types="list_of_sentences") 
         #output ['ak suka mkan apel rasa enak']
 
-Add more additional text preprocessing pipeline with  
-************************************************************************
+Add more additional text preprocessing pipeline with only one method
+********************************************************************
 ::
 
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
@@ -145,7 +145,7 @@ Add more additional text preprocessing pipeline with
         #output ['saya suka makan apel rasa enak']
 
 Customize text preprocessing pipeline with only one method
-**************************************************************
+**********************************************************
 ::
 
        # Customize process pipeline
@@ -318,7 +318,7 @@ WORKING WITH DATAFRAME
         doc = pd.DataFrame(teks,columns=["text"])
 
 Automate text preprocessing pipeline in dataframe with only one method
-**************************************************************************
+**********************************************************************
 ::
 
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
@@ -334,7 +334,7 @@ Automate text preprocessing pipeline in dataframe with only one method
 
 
 Add more additional text preprocessing pipeline in dataframe with only one method
-*************************************************************************************
+*********************************************************************************
 ::
 
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
@@ -363,7 +363,7 @@ Add more additional text preprocessing pipeline in dataframe with only one metho
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
 Customize text preprocessing pipeline in dataframe with only one method
-***************************************************************************
+***********************************************************************
 ::
 
         # Customize pipeline 
