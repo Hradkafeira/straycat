@@ -95,11 +95,12 @@ Usage
         10 or "normalize_slang"
         11 or "date_removal"
 
-Automate text preprocessing with single line of code
+Automate text preprocessing with only one method
 ****************************************************
 ::
 
-        # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
+        # Automate Text Preprocessing with default pipelines 
+        (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
 
         # Return list of Tokens
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"]) 
@@ -109,7 +110,7 @@ Automate text preprocessing with single line of code
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],return_types="list_of_sentences") 
         #output ['ak suka mkan apel rasa enak']
 
-Add more additional text preprocessing pipeline with single line of code
+Add more additional text preprocessing pipeline with  
 ************************************************************************
 ::
 
@@ -143,7 +144,7 @@ Add more additional text preprocessing pipeline with single line of code
                           return_types="list_of_sentences" )
         #output ['saya suka makan apel rasa enak']
 
-Customize text preprocessing pipeline with single line of code
+Customize text preprocessing pipeline with only one method
 **************************************************************
 ::
 
@@ -316,7 +317,7 @@ WORKING WITH DATAFRAME
         teks = ["tvri.com 14/08/1945 telah terjadi hari kemerdekaan","ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"]
         doc = pd.DataFrame(teks,columns=["text"])
 
-Automate text preprocessing pipeline in dataframe with single line of code
+Automate text preprocessing pipeline in dataframe with only one method
 **************************************************************************
 ::
 
@@ -332,7 +333,7 @@ Automate text preprocessing pipeline in dataframe with single line of code
         #output ['tvri com 14 08 1945 jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
 
-Add more additional text preprocessing pipeline in dataframe with single line of code
+Add more additional text preprocessing pipeline in dataframe with only one method
 *************************************************************************************
 ::
 
@@ -361,7 +362,7 @@ Add more additional text preprocessing pipeline in dataframe with single line of
                           return_types="list_of_sentences")
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
-Customize text preprocessing pipeline in dataframe with single line of code
+Customize text preprocessing pipeline in dataframe with only one method
 ***************************************************************************
 ::
 
