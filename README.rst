@@ -48,19 +48,16 @@ Features
 Installation
 ============
 
-
-Testing release
+Stable release
 --------------
 
-
-To install straycat (, run this command in your terminal:
+To install straycat, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install -i https://test.pypi.org/simple/ straycat
+    $ pip install straycat
 
-This is the preferred method to install straycat in developer mode.
-
+This is the preferred method to install straycat, as it will always install the most recent stable release.
 
 Usage
 *****
