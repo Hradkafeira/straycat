@@ -70,8 +70,8 @@ class TestTextPreprocessing(object):
         assert exc_info5.match("process can't be empty")
         assert exc_info6.match("process must be added")
         assert exc_info7.match("process can't be empty")
-        assert exc_info8.match("value process are 'name' but input_proc is 'num'")
-        assert exc_info9.match("value process are 'num' but input_proc is 'name'")
+        assert exc_info8.match("value process are 'name' but input_proc is 'num'")  # noqa:E501
+        assert exc_info9.match("value process are 'num' but input_proc is 'name'")  # noqa:E501
         assert exc_info_without_match1
         assert exc_info_without_match2
 
@@ -94,17 +94,17 @@ class TestTextPreprocessing(object):
         expected1 = [['tvri', 'com', 'jadi', 'hari', 'merdeka']]
 
         actual2 = st.auto_text_prep(["tvri com 14 08 1945 jadi hari merdeka"],
-                                    set_process="add_process", input_proc="name",
+                                    set_process="add_process", input_proc="name",  # noqa:E501
                                     process=["date_removal"])
         expected2 = [['tvri', 'com', 'jadi', 'hari', 'merdeka']]
 
         actual3 = st.auto_text_prep(["tvri com 14 08 1945 jadi hari merdeka"],
-                                    set_process="add_process",process=[11],
+                                    set_process="add_process", process=[11],
                                     return_types="list_of_sentences")
         expected3 = ['tvri com jadi hari merdeka']
 
         actual4 = st.auto_text_prep(["tvri com 14 08 1945 jadi hari merdeka"],
-                                    set_process="add_process", input_proc="name",
+                                    set_process="add_process", input_proc="name",  # noqa:E501
                                     process=["date_removal"],
                                     return_types="list_of_sentences")
         expected4 = ['tvri com jadi hari merdeka']
@@ -195,7 +195,6 @@ class TestTextPreprocessing(object):
         actual1 = st.auto_text_prep(doc["text"], set_process="add_process",
                                     process=[6, 11])  # noqa:E501
         expected1 = [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]  # noqa:E501
-
 
         actual2 = st.auto_text_prep(doc["text"], set_process="add_process",
                                     input_proc="name",
