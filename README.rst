@@ -1,9 +1,9 @@
 ========
-straycat
+STRAYCAT
 ========
 
 .. image:: assets/straycat_logo.png
-  :width: 400
+        :width: 400
 
 .. image:: https://img.shields.io/pypi/v/straycat.svg
         :target: https://pypi.python.org/pypi/straycat
@@ -20,7 +20,12 @@ straycat
 
 .. image:: https://codecov.io/gh/Hradkafeira/straycat/branch/main/graph/badge.svg?token=6SH3QTEU8D
         :target: https://codecov.io/gh/Hradkafeira/straycat
-    
+        
+.. raw:: html
+
+  <p align="left">
+  <span>English</span> |
+  <a href="https://github.com/difo-n8r/straycat/tree/straycat_dev/lang/indonesia#straycat">Bahasa</a>
 
 Easy NLP implementation for Indonesian Language
 
