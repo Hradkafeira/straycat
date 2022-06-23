@@ -77,6 +77,24 @@ Usage
         # Instatiation with combine default stopwords and your stopwords
         st = TextPreprocessing.add_stopwords(["sw1", "sw2", "etc"])
 
+        #See available pipelines before using it
+        print(st.list_process)
+        #output
+        
+        Here the list for auto_text_prep
+        Input value with number or text
+        1  or "case_folding"
+        2  or "punctuation_removal"
+        3  or "stopwords_removal"
+        4  or "stemming"
+        5  or "encode_text"
+        6  or "medianame_removal"
+        7  or "non_alnum_removal"
+        8  or "link_removal"
+        9  or "emoji_removal"
+        10 or "normalize_slang"
+        11 or "date_removal"
+
 Automate text preprocessing with single line of code
 ****************************************************
 ::
@@ -90,7 +108,6 @@ Automate text preprocessing with single line of code
         #Return list of Sentences               
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],return_types="list_of_sentences") 
         #output ['ak suka mkan apel rasa enak']
-
 
 Add more additional text preprocessing pipeline with single line of code
 ************************************************************************
@@ -277,9 +294,27 @@ WORKING WITH DATAFRAME
 
         # Instatiation with combine default stopwords and your stopwords
         st = TextPreprocessing.add_stopwords(["sw1", "sw2", "etc"])
+
+        #See available pipelines before using it
+        print(st.list_process)
+        #output
+        
+        Here the list for auto_text_prep
+        Input value with number or text
+        1  or "case_folding"
+        2  or "punctuation_removal"
+        3  or "stopwords_removal"
+        4  or "stemming"
+        5  or "encode_text"
+        6  or "medianame_removal"
+        7  or "non_alnum_removal"
+        8  or "link_removal"
+        9  or "emoji_removal"
+        10 or "normalize_slang"
+        11 or "date_removal"
+
         teks = ["tvri.com 14/08/1945 telah terjadi hari kemerdekaan","ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"]
         doc = pd.DataFrame(teks,columns=["text"])
-
 
 Automate text preprocessing pipeline in dataframe with single line of code
 **************************************************************************

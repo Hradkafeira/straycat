@@ -6,22 +6,21 @@ from .core_text_preprocessing import _CoreTextPreprocessing
 class TextPreprocessing(_CoreTextPreprocessing):
     """ Module for Automate Text Preprocessing"""
 
-    def list_process(self):
-        return """
-                    Here the list for auto_text_prep
-                    Input value with number 1 or text "case_folding"
-                    1  --> "case_folding"
-                    2  --> "punctuation_removal"
-                    3  --> "stopwords_removal"
-                    4  --> "stemming"
-                    5  --> "encode_text"
-                    6  --> "medianame_removal"
-                    7  --> "non_alnum_removal"
-                    8  --> "link_removal"
-                    9  --> "emoji_removal"
-                    10 --> "normalize_slang"
-                    11 --> "date_removal"
-                """
+    list_process = """
+        Here the list for auto_text_prep
+        Input value with number or text
+        1  or "case_folding"
+        2  or "punctuation_removal"
+        3  or "stopwords_removal"
+        4  or "stemming"
+        5  or "encode_text"
+        6  or "medianame_removal"
+        7  or "non_alnum_removal"
+        8  or "link_removal"
+        9  or "emoji_removal"
+        10 or "normalize_slang"
+        11 or "date_removal"
+        """
 
     def auto_text_prep(self, series,
                        set_process="standard",
