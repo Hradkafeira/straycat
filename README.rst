@@ -98,17 +98,33 @@ Add more additional text preprocessing pipeline with single line of code
 
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
 
-        # Return list of Tokens
+        # Return list of Tokens with number args of process
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
-                        set_process="add_process",process=["normalize_slang"] )
+                        set_process="add_process",
+                        process=[10])
         #output [['saya', 'suka', 'makan', 'apel', 'rasa', 'enak']]
 
-        # Return list of Sentences
+        # Return list of Tokens with name args of process
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
-                        set_process="add_process",process=["normalize_slang"], 
-                        return_types="list_of_sentences" )
+                          set_process="add_process",
+                          input_proc="name",
+                          process=["normalize_slang"])
+        #output [['saya', 'suka', 'makan', 'apel', 'rasa', 'enak']]
+
+        # Return list of Sentences with number args of process
+        st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
+                          set_process="add_process",
+                          process=[10], 
+                          return_types="list_of_sentences" )
         #output ['saya suka makan apel rasa enak']
 
+        # Return list of Sentences with name args of process
+        st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
+                          set_process="add_process",
+                          input_proc="name",
+                          process=["normalize_slang"], 
+                          return_types="list_of_sentences" )
+        #output ['saya suka makan apel rasa enak']
 
 Customize text preprocessing pipeline with single line of code
 **************************************************************
@@ -116,12 +132,31 @@ Customize text preprocessing pipeline with single line of code
 
        # Customize process pipeline
 
-        st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"],
-                        set_process="customize",process=["normalize_slang"] )
+        # Return list of Tokens with number args of process
+        st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
+                        set_process="customize",
+                        process=[10])
         #output [['saya','suka','makan','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
 
+        # Return list of Tokens with name args of process
+        st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
+                          set_process="customize",
+                          input_proc="name",
+                          process=["normalize_slang"])
+        #output [['saya','suka','makan','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
+
+        # Return list of Sentences with number args of process
+        st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],
+                          set_process="customize",
+                          process=[10], 
+                          return_types="list_of_sentences" )
+        #output ['saya suka makan apel karena rasanya enak ! ! ! 😁 😆 😅']
+
+        # Return list of Sentences with name args of process
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"],
-                        set_process="customize",process=["normalize_slang"], 
+                        set_process="customize",
+                        input_proc="name",
+                        process=["normalize_slang"], 
                         return_types="list_of_sentences")
         #output ['saya suka makan apel karena rasanya enak ! ! ! 😁 😆 😅']
 
@@ -201,7 +236,7 @@ Use specific text preprocessing task
         st.remove_link("https://www.kompas.com berita hari ini") 
         #output ["berita", "hari", "ini"]
 
-        st.remove_link("https://www.kompas.com berita hari ini", return_type = "tokens") 
+        st.remove_link("https://www.kompas.com berita hari ini", return_type = "sentences") 
         #output "berita hari ini"
 
         # Remove media name
@@ -252,10 +287,12 @@ Automate text preprocessing pipeline in dataframe with single line of code
 
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
 
+        # Return list of Tokens
         st.auto_text_prep(doc["text"]) 
         #output [['tvri', 'com', '14', '08', '1945', 'jadi', 'hari', 'merdeka'],
         ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
+        # Return list of Sentences
         st.auto_text_prep(doc["text"], return_types="list_of_sentences")
         #output ['tvri com 14 08 1945 jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
@@ -266,14 +303,28 @@ Add more additional text preprocessing pipeline in dataframe with single line of
 
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
 
-        st.auto_text_prep(doc["text"], set_process="add_process", process=["medianame_removal","date_removal"])
+        # Return list of Tokens with number args of process
+        st.auto_text_prep(doc["text"], set_process="add_process", process=[6, 11])
         #output [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
+        # Return list of Tokens with name args of process
+        st.auto_text_prep(doc["text"], set_process="add_process",
+                          input_proc="name",
+                          process=["medianame_removal","date_removal"])
+        #output [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]
 
-        st.auto_text_prep(doc["text"], set_process="add_process", process=["medianame_removal","date_removal"],       
+        # Return list of Sentences with name args of process
+        st.auto_text_prep(doc["text"], set_process="add_process", 
+                          process=[6, 11],       
                         return_types="list_of_sentences")
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
+        # Return list of Sentences with name args of process
+        st.auto_text_prep(doc["text"], set_process="add_process",
+                          input_proc="name",
+                          process=["medianame_removal","date_removal"],       
+                          return_types="list_of_sentences")
+        #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
 Customize text preprocessing pipeline in dataframe with single line of code
 ***************************************************************************
@@ -281,12 +332,30 @@ Customize text preprocessing pipeline in dataframe with single line of code
 
         # Customize pipeline 
 
-        st.auto_text_prep(doc["text"], set_process="customize", process=["medianame_removal","date_removal"])
+        # Return list of Tokens with number args of process
+        st.auto_text_prep(doc["text"], set_process="customize", process=[6, 11])
         #output [['telah', 'terjadi', 'hari', 'kemerdekaan'],
                 ['ak','suka','mkn','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
 
-        st.auto_text_prep(doc["text"], set_process="customize", process=["medianame_removal","date_removal"],
+        # Return list of Tokens with name args of process
+        st.auto_text_prep(doc["text"], set_process="customize", 
+                          input_proc="name",
+                          process=["medianame_removal","date_removal"])
+        #output [['telah', 'terjadi', 'hari', 'kemerdekaan'],
+                ['ak','suka','mkn','apel','karena','rasanya','enak','!','!','!','😁','😆','😅']]
+
+
+        # Return list of Sentences with number args of process
+        st.auto_text_prep(doc["text"], set_process="customize",
+                          process=[6, 11],
                         return_types="list_of_sentences")
+        #output ['telah terjadi hari kemerdekaan','ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
+
+        # Return list of Sentences with name args of process
+        st.auto_text_prep(doc["text"], set_process="customize",
+                          input_proc="name", 
+                          process=["medianame_removal","date_removal"],
+                          return_types="list_of_sentences")
         #output ['telah terjadi hari kemerdekaan','ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
 
 Credits

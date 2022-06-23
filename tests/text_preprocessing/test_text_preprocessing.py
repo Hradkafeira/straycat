@@ -44,11 +44,23 @@ class TestTextPreprocessing(object):
             st.auto_text_prep(["halo nama saya arief"], set_process="customize",  # noqa:E501
                               process=[])
 
+        with pytest.raises(ValueError) as exc_info7:
+            st.auto_text_prep(["halo nama saya arief"], set_process="customize",  # noqa:E501
+                              process=[])
+
         with pytest.raises(ValueError) as exc_info8:
+            st.auto_text_prep(["halo nama saya arief"], set_process="customize",  # noqa:E501
+                              process=["normalize_slang"])
+
+        with pytest.raises(ValueError) as exc_info9:
+            st.auto_text_prep(["halo nama saya arief"], set_process="customize",  # noqa:E501
+                              process=[10], input_proc="name")
+
+        with pytest.raises(ValueError) as exc_info_without_match1:
             st.auto_text_prep(["halo nama saya arief"], set_process="add_process",  # noqa:E501
                               process=["remove_slang"])
 
-        with pytest.raises(ValueError) as exc_info9:
+        with pytest.raises(ValueError) as exc_info_without_match2:
             st.auto_text_prep(["halo nama saya arief"], set_process="custom")  # noqa:E501
 
         assert exc_info1.match("input type must be List or numpy array or series")  # noqa:E501
@@ -58,8 +70,10 @@ class TestTextPreprocessing(object):
         assert exc_info5.match("process can't be empty")
         assert exc_info6.match("process must be added")
         assert exc_info7.match("process can't be empty")
-        assert exc_info8
-        assert exc_info9
+        assert exc_info8.match("value process are 'name' but input_proc is 'num'")
+        assert exc_info9.match("value process are 'num' but input_proc is 'name'")
+        assert exc_info_without_match1
+        assert exc_info_without_match2
 
     def test_auto_text_prep_default(self):
 
@@ -76,22 +90,34 @@ class TestTextPreprocessing(object):
     def test_auto_text_prep_add_process(self):
 
         actual1 = st.auto_text_prep(["tvri com 14 08 1945 jadi hari merdeka"],
-                                    set_process="add_process", process=["date_removal"])  # noqa:E501
+                                    set_process="add_process", process=[11])  # noqa:E501
         expected1 = [['tvri', 'com', 'jadi', 'hari', 'merdeka']]
 
         actual2 = st.auto_text_prep(["tvri com 14 08 1945 jadi hari merdeka"],
-                                    set_process="add_process", process=["date_removal"],  # noqa:E501
+                                    set_process="add_process", input_proc="name",
+                                    process=["date_removal"])
+        expected2 = [['tvri', 'com', 'jadi', 'hari', 'merdeka']]
+
+        actual3 = st.auto_text_prep(["tvri com 14 08 1945 jadi hari merdeka"],
+                                    set_process="add_process",process=[11],
                                     return_types="list_of_sentences")
-        expected2 = ['tvri com jadi hari merdeka']
+        expected3 = ['tvri com jadi hari merdeka']
+
+        actual4 = st.auto_text_prep(["tvri com 14 08 1945 jadi hari merdeka"],
+                                    set_process="add_process", input_proc="name",
+                                    process=["date_removal"],
+                                    return_types="list_of_sentences")
+        expected4 = ['tvri com jadi hari merdeka']
 
         assert actual1 == expected1, MESSAGE
         assert actual2 == expected2, MESSAGE
+        assert actual3 == expected3, MESSAGE
+        assert actual4 == expected4, MESSAGE
 
     def test_auto_text_prep_customize(self):
 
         actual1 = st.auto_text_prep(["ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"],  # noqa:E501
-                                    set_process="customize",
-                                    process=["normalize_slang"])
+                                    set_process="customize", process=[10])
         expected1 = [
                         [
                             'saya',
@@ -111,12 +137,41 @@ class TestTextPreprocessing(object):
                     ]
 
         actual2 = st.auto_text_prep(["ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"],  # noqa:E501
-                                    set_process="customize", process=["normalize_slang"],  # noqa:E501
+                                    set_process="customize", input_proc="name",
+                                    process=["normalize_slang"])
+        expected2 = [
+                        [
+                            'saya',
+                            'suka',
+                            'makin',
+                            'apel',
+                            'karena',
+                            'rasanya',
+                            'enak',
+                            '!',
+                            '!',
+                            '!',
+                            '😁',
+                            '😆',
+                            '😅'
+                            ]
+                    ]
+
+        actual3 = st.auto_text_prep(["ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"],  # noqa:E501
+                                    set_process="customize", process=[10],
                                     return_types="list_of_sentences")
-        expected2 = ['saya suka makin apel karena rasanya enak ! ! ! 😁 😆 😅']
+        expected3 = ['saya suka makin apel karena rasanya enak ! ! ! 😁 😆 😅']
+
+        actual4 = st.auto_text_prep(["ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"],  # noqa:E501
+                                    set_process="customize", input_proc="name",
+                                    process=["normalize_slang"],
+                                    return_types="list_of_sentences")
+        expected4 = ['saya suka makin apel karena rasanya enak ! ! ! 😁 😆 😅']
 
         assert actual1 == expected1, MESSAGE
         assert actual2 == expected2, MESSAGE
+        assert actual3 == expected3, MESSAGE
+        assert actual4 == expected4, MESSAGE
 
     def test_df_auto_text_prep_default(self):
 
@@ -138,21 +193,35 @@ class TestTextPreprocessing(object):
     def test_df_auto_text_prep_add_process(self):
 
         actual1 = st.auto_text_prep(doc["text"], set_process="add_process",
-                                    process=["medianame_removal", "date_removal"])  # noqa:E501
+                                    process=[6, 11])  # noqa:E501
         expected1 = [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]  # noqa:E501
 
+
         actual2 = st.auto_text_prep(doc["text"], set_process="add_process",
+                                    input_proc="name",
+                                    process=["medianame_removal", "date_removal"])  # noqa:E501
+        expected2 = [['jadi', 'hari', 'merdeka'], ['ak', 'suka', 'mkn', 'apel', 'rasa', 'enak']]  # noqa:E501
+
+        actual3 = st.auto_text_prep(doc["text"], set_process="add_process",
+                                    process=[6, 11],
+                                    return_types="list_of_sentences")
+        expected3 = ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
+
+        actual4 = st.auto_text_prep(doc["text"], set_process="add_process",
+                                    input_proc="name",
                                     process=["medianame_removal", "date_removal"],  # noqa:E501
                                     return_types="list_of_sentences")
-        expected2 = ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
+        expected4 = ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
         assert actual1 == expected1, MESSAGE
         assert actual2 == expected2, MESSAGE
+        assert actual3 == expected3, MESSAGE
+        assert actual4 == expected4, MESSAGE
 
     def test_df_auto_text_prep_customize(self):
 
         actual1 = st.auto_text_prep(doc["text"], set_process="customize",
-                                    process=["medianame_removal", "date_removal"])  # noqa:E501
+                                    process=[6, 11])  # noqa:E501
         expected1 = [
                         ['telah', 'terjadi', 'hari', 'kemerdekaan'],
                         [
@@ -173,11 +242,43 @@ class TestTextPreprocessing(object):
                     ]
 
         actual2 = st.auto_text_prep(doc["text"], set_process="customize",
+                                    input_proc="name",
+                                    process=["medianame_removal", "date_removal"])  # noqa:E501
+        expected2 = [
+                        ['telah', 'terjadi', 'hari', 'kemerdekaan'],
+                        [
+                            'ak',
+                            'suka',
+                            'mkn',
+                            'apel',
+                            'karena',
+                            'rasanya',
+                            'enak',
+                            '!',
+                            '!',
+                            '!',
+                            '😁',
+                            '😆',
+                            '😅'
+                        ]
+                    ]
+
+        actual3 = st.auto_text_prep(doc["text"], set_process="customize",
+                                    process=[6, 11],  # noqa:E501
+                                    return_types="list_of_sentences")
+        expected3 = [
+                    'telah terjadi hari kemerdekaan',
+                    'ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
+
+        actual4 = st.auto_text_prep(doc["text"], set_process="customize",
+                                    input_proc="name",
                                     process=["medianame_removal", "date_removal"],  # noqa:E501
                                     return_types="list_of_sentences")
-        expected2 = [
+        expected4 = [
                     'telah terjadi hari kemerdekaan',
                     'ak suka mkn apel karena rasanya enak!!! 😁 😆 😅']
 
         assert actual1 == expected1, MESSAGE
         assert actual2 == expected2, MESSAGE
+        assert actual3 == expected3, MESSAGE
+        assert actual4 == expected4, MESSAGE

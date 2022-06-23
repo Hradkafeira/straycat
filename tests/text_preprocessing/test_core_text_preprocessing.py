@@ -3,30 +3,30 @@
 """Tests for `straycat` package."""
 
 import pytest
-from straycat.text_preprocessing.core_text_preprocessing import CoreTextPreprocessing  # noqa:501
+from straycat.text_preprocessing.core_text_preprocessing import _CoreTextPreprocessing  # noqa:501
 
-st = CoreTextPreprocessing()
+st = _CoreTextPreprocessing()
 
 MESSAGE = "the return value of process doesn't match to expected value"  # noqa:501
 
 
-class TestCoreTextPreprocessing(object):
+class Test_CoreTextPreprocessing(object):
 
     def test_error(self):
         with pytest.raises(ValueError) as exc_info1:
-            CoreTextPreprocessing.add_stopwords("sw1sw2")
+            _CoreTextPreprocessing.add_stopwords("sw1sw2")
 
         with pytest.raises(ValueError) as exc_info2:
-            CoreTextPreprocessing.add_stopwords(add_sw="sw1sw2", filenames="test.txt")  # noqa:E501
+            _CoreTextPreprocessing.add_stopwords(add_sw="sw1sw2", filenames="test.txt")  # noqa:E501
 
         with pytest.raises(ValueError) as exc_info3:
-            CoreTextPreprocessing("this is string")
+            _CoreTextPreprocessing("this is string")
 
         with pytest.raises(TypeError) as exc_info4:
-            CoreTextPreprocessing(123)
+            _CoreTextPreprocessing(123)
 
         with pytest.raises(TypeError) as exc_info5:
-            CoreTextPreprocessing.add_stopwords(123)
+            _CoreTextPreprocessing.add_stopwords(123)
 
         assert exc_info1.match("type must be list")
         assert exc_info2.match("can't filled both of arguments")
@@ -37,9 +37,9 @@ class TestCoreTextPreprocessing(object):
     def test_add_stopwords(self):
         actual1 = len(st.stopwords_lib)
         expected1 = 123
-        actual2 = len(CoreTextPreprocessing.add_stopwords(["sw1", "sw2"]).stopwords_lib)  # noqa:E501
+        actual2 = len(_CoreTextPreprocessing.add_stopwords(["sw1", "sw2"]).stopwords_lib)  # noqa:E501
         expected2 = 125
-        actual3 = len(CoreTextPreprocessing(other_stopwords=["sw1", "sw2"]).stopwords_lib)  # noqa:E501
+        actual3 = len(_CoreTextPreprocessing(other_stopwords=["sw1", "sw2"]).stopwords_lib)  # noqa:E501
         expected3 = 2
 
         assert actual1 == expected1, MESSAGE

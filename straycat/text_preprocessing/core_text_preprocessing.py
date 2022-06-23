@@ -10,21 +10,20 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from .count_decorator import counted
 
 
-class CoreTextPreprocessing:
+class _CoreTextPreprocessing:
     """
     Steps of Text Preprocessing class which contains:
-    case folding
-    encode text
-    tokenizing
-    stopwords removal
-    punctuation removal
-    stemmming
-    date removal
-    normalize slang
-    link removal
-    medianame removal
-    non alnum removal
-    emoji removal
+    1  --> "case_folding"
+    2  --> "punctuation_removal"
+    3  --> "stopwords_removal"
+    4  --> "stemming"
+    5  --> "encode_text"
+    6  --> "medianame_removal"
+    7  --> "non_alnum_removal"
+    8  --> "link_removal"
+    9  --> "emoji_removal"
+    10 --> "normalize_slang"
+    11 --> "date_removal"
     """
 
     _CALL_SPACY = None
@@ -33,7 +32,7 @@ class CoreTextPreprocessing:
     @counted
     def _called_spacy(self):
         """Instantiation spacy module for bahasa Indonesia"""
-        CoreTextPreprocessing._CALL_SPACY = spacy.blank('id')
+        _CoreTextPreprocessing._CALL_SPACY = spacy.blank('id')
 
     def __init__(
             self,
@@ -67,9 +66,9 @@ class CoreTextPreprocessing:
                 raise TypeError("type must be list")
 
     def __repr__(self):
-        if self.other_stopwords is None and CoreTextPreprocessing._CALL_METHODCLASS_STOPWORDS is False:  # noqa:E501
+        if self.other_stopwords is None and _CoreTextPreprocessing._CALL_METHODCLASS_STOPWORDS is False:  # noqa:E501
             return "Default Stopwords"
-        elif self.other_stopwords is not None and CoreTextPreprocessing._CALL_METHODCLASS_STOPWORDS is True:  # noqa:E501
+        elif self.other_stopwords is not None and _CoreTextPreprocessing._CALL_METHODCLASS_STOPWORDS is True:  # noqa:E501
             return "Add Stopwords"
         else:
             return "Use other Stopwords"
@@ -106,7 +105,7 @@ class CoreTextPreprocessing:
 
             stopwords_lib = set(swsastrawi().get_stop_words() + stopwords)
 
-            CoreTextPreprocessing._CALL_METHODCLASS_STOPWORDS = True
+            _CoreTextPreprocessing._CALL_METHODCLASS_STOPWORDS = True
 
             return cls(stopwords_lib)
 
@@ -140,7 +139,7 @@ class CoreTextPreprocessing:
         ["saya", "sedang", "memakan", "apple"]
         """
         if self.token_lib == "spacy":
-            tokens = CoreTextPreprocessing._CALL_SPACY(text)
+            tokens = _CoreTextPreprocessing._CALL_SPACY(text)
             return [token.text for token in tokens]
         elif self.token_lib == "nltk":
             return word_tokenize(text)

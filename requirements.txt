@@ -1,4 +1,4 @@
 nltk==3.6.5
-pandas==1.3.5
+pandas
 Sastrawi==1.0.1
 spacy==3.3.1
