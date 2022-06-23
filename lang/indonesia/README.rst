@@ -41,7 +41,7 @@ Fitur-fitur
 - Tokenization
 - Stemming
 - Stopwords 
-- Menghapus Punctuation
+- Menghapus Tanda baca
 - Menghapus emoji
 - Menghapus non alpha numeric
 - Menghapus link
@@ -103,7 +103,7 @@ Otomatisasi preprocessing teks dengan metode sekali panggil.
 ::
 
         # Otomatisasi dengan pipeline default 
-        (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
+        (tokenizing, case folding, remove tanda baca, remove stopwords, stemming)
 
         # Mengembalikan list dari Token
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!! 😁 😆 😅"]) 
