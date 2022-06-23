@@ -49,7 +49,7 @@ Installation
 ============
 
 Testing release
-----------------
+---------------
 
 To install straycat_dev, run this command in your terminal:
 
@@ -92,8 +92,8 @@ Usage
         10 or "normalize_slang"
         11 or "date_removal"
 
-Automate text preprocessing with calling one method
-****************************************************
+Automate text preprocessing with call one method
+************************************************
 ::
 
         # Automate Text Preprocessing with default pipelines 
@@ -107,8 +107,8 @@ Automate text preprocessing with calling one method
         st.auto_text_prep(["ak suka mkan apel karena rasanya enak!!!"],return_types="list_of_sentences") 
         #output ['ak suka mkan apel rasa enak']
 
-Add more additional text preprocessing pipeline with calling one method
-************************************************************************
+Add more additional text preprocessing pipeline with call one method
+********************************************************************
 ::
 
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
@@ -141,8 +141,8 @@ Add more additional text preprocessing pipeline with calling one method
                           return_types="list_of_sentences" )
         #output ['saya suka makan apel rasa enak']
 
-Customize text preprocessing pipeline with calling one method
-**************************************************************
+Customize text preprocessing pipeline with call one method
+**********************************************************
 ::
 
        # Customize process pipeline
@@ -177,7 +177,7 @@ Customize text preprocessing pipeline with calling one method
 
 
 Use specific text preprocessing task
-*************************************
+************************************
 ::
 
         # Tokenize Indonesian Language
@@ -276,7 +276,7 @@ Use specific text preprocessing task
 
 
 WORKING WITH DATAFRAME
-***********************
+**********************
 ::
 
         # Straycat with DataFrame
@@ -314,8 +314,8 @@ WORKING WITH DATAFRAME
         teks = ["tvri.com 14/08/1945 telah terjadi hari kemerdekaan","ak suka mkn apel karena rasanya enak!!! 😁 😆 😅"]
         doc = pd.DataFrame(teks,columns=["text"])
 
-Automate text preprocessing pipeline in dataframe with calling one method
-**************************************************************************
+Automate text preprocessing pipeline in dataframe with call one method
+**********************************************************************
 ::
 
         # Automate Text Preprocessing with default pipeline (tokenizing, case folding, remove punctuation, remove stopwords, stemming)
@@ -330,8 +330,8 @@ Automate text preprocessing pipeline in dataframe with calling one method
         #output ['tvri com 14 08 1945 jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
 
-Add more additional text preprocessing pipeline in dataframe with calling one method
-*************************************************************************************
+Add more additional text preprocessing pipeline in dataframe with call one method
+*********************************************************************************
 ::
 
         # Add more additional pipeline (normalize slang word, remove date, remove emoji, remove medianame, remove link, remove non alnum )
@@ -359,8 +359,8 @@ Add more additional text preprocessing pipeline in dataframe with calling one me
                           return_types="list_of_sentences")
         #output ['jadi hari merdeka', 'ak suka mkn apel rasa enak']
 
-Customize text preprocessing pipeline in dataframe with calling one method
-***************************************************************************
+Customize text preprocessing pipeline in dataframe with call one method
+***********************************************************************
 ::
 
         # Customize pipeline 
