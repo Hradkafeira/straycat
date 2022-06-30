@@ -11,3 +11,4 @@ Contributors
 ------------
 
 * Nadhif Naufal <nadhifznz@gmail.com>
+* Put Your Name
