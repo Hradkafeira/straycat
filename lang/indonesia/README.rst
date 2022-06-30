@@ -24,7 +24,7 @@ STRAYCAT
 .. raw:: html
 
   <p align="left">
-  <a href="https://github.com/difo-n8r/straycat/tree/straycat_dev">English</a> |
+  <a href="https://github.com/hradkafeira/straycat/tree/straycat_dev">English</a> |
   <span>Bahasa</span>
     
 
