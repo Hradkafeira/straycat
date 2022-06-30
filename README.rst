@@ -25,7 +25,7 @@ STRAYCAT
 
   <p align="left">
   <span>English</span> |
-  <a href="https://github.com/difo-n8r/straycat/tree/straycat_dev/lang/indonesia#straycat">Bahasa</a>
+  <a href="https://github.com/hradkafeira/straycat/tree/straycat_dev/lang/indonesia#straycat">Bahasa</a>
 
 Easy NLP implementation for Indonesian Language
 
